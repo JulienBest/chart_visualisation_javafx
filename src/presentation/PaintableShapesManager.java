@@ -1,6 +1,8 @@
 package presentation;
 
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
+import javafx.scene.shape.Line;
 import util.Observable;
 import util.Observer;
 
@@ -12,7 +14,8 @@ public class PaintableShapesManager implements Observable<ArrayList<Node>> {
     private ArrayList<Observer<ArrayList<Node>>> observers = new ArrayList<>();
     private static PaintableShapesManager instance;
 
-    private PaintableShapesManager() {}
+    private PaintableShapesManager() {
+    }
 
     public static PaintableShapesManager getInstance() {
         if (instance == null) {
@@ -21,7 +24,7 @@ public class PaintableShapesManager implements Observable<ArrayList<Node>> {
         return instance;
     }
 
-    public ArrayList<Node> getShapes() {
+    public ArrayList<Node> getNodes() {
         return nodes;
     }
 
@@ -45,6 +48,26 @@ public class PaintableShapesManager implements Observable<ArrayList<Node>> {
         for (Observer<ArrayList<Node>> o : observers) {
             o.update(this.nodes);
         }
+    }
+
+    public Point2D getYCoordinateForXCoordinate(double x) {
+        Point2D nearest = new Point2D(0, 0);
+        double bestDistance = Integer.MAX_VALUE;
+
+        for (int i = 0; i < nodes.size(); i++) {
+            Line line = ((Line) nodes.get(i));
+            double distance1 = Math.abs(x - line.getStartX());
+            double distance2 = Math.abs(x - line.getEndX());
+            if (distance1 < bestDistance) {
+                bestDistance = distance1;
+                nearest = new Point2D(line.getStartX(), line.getStartY());
+            }
+            if (distance2 < bestDistance) {
+                bestDistance = distance2;
+                nearest = new Point2D(line.getEndX(), line.getEndY());
+            }
+        }
+        return nearest;
     }
 }
 

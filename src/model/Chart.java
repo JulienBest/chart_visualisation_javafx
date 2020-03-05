@@ -12,6 +12,7 @@ public class Chart {
     public Chart(RandomChartDataGenerator gen) {
         this.points = gen.generateChartData(4.0);
     }
+
     public Chart() {
         this.points = new ArrayList<>();
     }
