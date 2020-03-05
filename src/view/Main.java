@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 public class Main extends Application implements Observer<ArrayList<Node>> {
 
-    private final int WIDTH = 1400;
-    private final int HEIGHT = 800;
+    public static final int WIDTH = 1400;
+    public static final int HEIGHT = 800;
     private Pane root;
 
     @Override
@@ -29,6 +29,7 @@ public class Main extends Application implements Observer<ArrayList<Node>> {
         primaryStage.setTitle("Chart Generator");
         Scene scene = new Scene(root, WIDTH, HEIGHT, Color.grayRgb(30));
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
 
         PaintableChart chart = new PaintableChart(new Chart(new RandomChartDataGenerator()));

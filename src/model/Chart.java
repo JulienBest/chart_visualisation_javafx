@@ -10,7 +10,7 @@ public class Chart {
     private ArrayList<Point2D> points;
 
     public Chart(RandomChartDataGenerator gen) {
-        this.points = gen.generateChartData(1.0);
+        this.points = gen.generateChartData(4.0);
     }
     public Chart() {
         this.points = new ArrayList<>();
